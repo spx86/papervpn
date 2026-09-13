@@ -95,16 +95,18 @@ search, do not guess.
 ## 3. Download
 
 ```bash
-papervpn download "<URL-or-DOI>" -o papers
-papervpn download "10.1016/j.meegid.2016.09.017" "https://ieeexplore.ieee.org/document/11376648" -o papers
-papervpn download -b urls.txt -o papers --max 10     # small, approved batch only
+papervpn download "<URL-or-DOI>"
+papervpn download "10.1016/j.meegid.2016.09.017" "https://ieeexplore.ieee.org/document/11376648"
+papervpn download -b urls.txt --max 10           # small, approved batch only
+papervpn download "<URL>" -o some/dir            # optional: choose the directory
 ```
 
 Accepted inputs: WebVPN URLs, publisher URLs, IEEE arnumber URLs, DOIs, PIIs.
 The downloader is **serial** with a 3–8 s random delay, de-duplicates against a
 history file, and refuses batches over 50 items (`--max` defaults to 10).
 
-Output defaults to `papers/`; each file is named by arnumber or PII.
+PDFs are written to the **current working directory** by default (override with
+`-o <dir>`); each file is named by arnumber or PII.
 
 ## 4. What happens per publisher
 
@@ -152,11 +154,11 @@ Two operational notes when calling `download_paper` over MCP:
 - **Give it time.** A ScienceDirect fetch drives a real browser and can take
   ~60–120 s. Set the client tool timeout generously (900 s+), otherwise the
   call reports a timeout even though the download actually completed.
-- **Use a workspace output directory, not the sandbox `/tmp`.** Some harness
-  sandboxes give each shell call a private, empty `/tmp`, so a file the MCP
-  server wrote to `/tmp` is invisible to the agent's later `ls`/`file`. Point
-  `output_dir` at the project (e.g. `papers/`) so both the MCP and the shell
-  see the same path.
+- **Prefer the working directory over `/tmp`.** Downloads default to the
+  current working directory; if you pass `output_dir`, keep it inside the
+  project. Some harness sandboxes give each shell call a private, empty `/tmp`,
+  so a file the MCP server wrote to `/tmp` is invisible to the agent's later
+  `ls`/`file`.
 
 Restart the harness after changing config.
 

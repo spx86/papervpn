@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
+SELF="$(readlink -f "${BASH_SOURCE[0]}")"
 if [ -n "${PAPERVPN_ROOT:-}" ]; then
   ROOT="$PAPERVPN_ROOT"
 else
-  ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." 2>/dev/null && pwd || true)"
+  ROOT="$(cd "$(dirname "$SELF")/../../.." 2>/dev/null && pwd || true)"
 fi
 
 python3 - <<'PY' || pip3 install --user --break-system-packages requests cryptography

@@ -61,8 +61,8 @@ them all:
 ```bash
 papervpn check                                     # authenticated: True ?
 papervpn login --from-chrome                       # import the live ticket from your browser
-papervpn download "10.1016/j.jare.2020.03.005" -o papers
-papervpn download "https://ieeexplore.ieee.org/document/11376648" -o papers
+papervpn download "10.1016/j.jare.2020.03.005"     # saves into the current directory
+papervpn download "https://ieeexplore.ieee.org/document/11376648" -o some/dir
 ```
 
 Accepted inputs: WebVPN URLs, publisher URLs, IEEE `/document/<arnumber>`
@@ -118,8 +118,9 @@ tool_timeout_sec = 900
 ```
 
 Give the client a generous tool timeout: a ScienceDirect fetch drives a real
-browser and can take ~60–120 s. Point `output_dir` at a workspace path, not a
-sandbox-private `/tmp`.
+browser and can take ~60–120 s. Downloads default to the current working
+directory; if you pass `output_dir`, keep it inside the project (not a
+sandbox-private `/tmp`).
 
 ## Configuration
 
@@ -130,7 +131,7 @@ session.
 | Env var | Meaning |
 | --- | --- |
 | `PAPERVPN_STATE` | State directory (default `~/.papervpn`) |
-| `PAPERVPN_OUTPUT` | Default download directory (default `./papers`) |
+| `PAPERVPN_OUTPUT` | Default download directory (default: current working directory) |
 | `PAPERVPN_HOST` | WebVPN host (default `webvpn.hainanu.edu.cn`) |
 | `PAPERVPN_AES_KEY` / `PAPERVPN_AES_IV` | Override the host-token codec key/IV |
 | `PAPERVPN_ROOT` | Source tree used by the skill launchers |

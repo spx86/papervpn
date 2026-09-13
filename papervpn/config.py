@@ -22,7 +22,7 @@ COOKIE_FILE = STATE_DIR / "cookies.json"
 STORAGE_STATE = STATE_DIR / "storage_state.json"
 BROWSER_PROFILE = STATE_DIR / "browser_profile"
 HISTORY_FILE = STATE_DIR / "downloads.json"
-DEFAULT_OUTPUT = Path(os.environ.get("PAPERVPN_OUTPUT", Path.cwd() / "papers"))
+DEFAULT_OUTPUT = Path(os.environ.get("PAPERVPN_OUTPUT", Path.cwd()))
 
 USER_AGENT = (
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
