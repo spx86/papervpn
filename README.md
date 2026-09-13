@@ -44,10 +44,16 @@ pip install --user --break-system-packages -e .
 # or just run the launchers in skill/papervpn/scripts/
 ```
 
-Install the agent skill into every local harness:
+Install the agent skill. By default it goes to `~/.agents/skills`, the shared
+directory that opencode, Codex, Claude Code and dsh all read — one copy covers
+them all:
 
 ```bash
-./install_skill.sh          # ~/.claude, ~/.config/opencode, ~/.agents, ~/.codex, ~/.dsh
+./install_skill.sh                 # -> ~/.agents/skills (default)
+./install_skill.sh -a codex,dsh    # or pick specific agents (multi-select)
+./install_skill.sh --all           # install to every known agent
+./install_skill.sh --list          # show install status
+./install_skill.sh -r --all        # remove from everywhere
 ```
 
 ## Quick start
