@@ -1,0 +1,22 @@
+# papervpn local state: session cookies, AES key cache, download history
+.papervpn
+.papervpn/
+
+# downloaded papers (copyrighted; never commit)
+papers/
+*.pdf
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# editors / os
+.DS_Store
+*.swp
+.idea/
+.vscode/

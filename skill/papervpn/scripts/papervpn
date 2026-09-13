@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# Resolve the source tree holding the `papervpn` package:
+#   1) $PAPERVPN_ROOT if set
+#   2) three levels up from this script (repo layout: <root>/skill/papervpn/scripts/)
+#   3) otherwise assume the package is already installed / on PYTHONPATH
+if [ -n "${PAPERVPN_ROOT:-}" ]; then
+  ROOT="$PAPERVPN_ROOT"
+else
+  ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." 2>/dev/null && pwd || true)"
+fi
+if [ -n "${ROOT:-}" ] && [ -d "$ROOT/papervpn" ]; then
+  exec env PYTHONPATH="$ROOT${PYTHONPATH:+:$PYTHONPATH}" python3 -m papervpn "$@"
+fi
+exec python3 -m papervpn "$@"

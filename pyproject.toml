@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "papervpn"
+version = "0.1.0"
+description = "Download paywalled papers through the Hainan University WebVPN"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.31",
+    "cryptography>=41",
+]
+
+[project.optional-dependencies]
+login = ["playwright>=1.44", "secretstorage>=3.3"]
+
+[project.scripts]
+papervpn = "papervpn.cli:main"
+papervpn-mcp = "papervpn.mcp_server:main"
+
+[tool.setuptools.packages.find]
+include = ["papervpn*"]
